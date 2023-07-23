@@ -37,6 +37,9 @@ $vOverlap: 15px;
   height: 1px;
   width: 10px;
   border-top: 1px solid black;
+  .minor & {
+    width: 5px;
+  }
 }
 
 .celsius, .fahrenheit {

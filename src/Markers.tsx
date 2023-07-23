@@ -1,5 +1,6 @@
 import { Marker } from './Marker';
 import { Range, useMarkerValues } from './useMarkerValues';
+import { useMinorMarkerValues } from './useMinorMarkerValues';
 
 
 interface Props {
@@ -12,15 +13,24 @@ interface Props {
 
 export const Markers = (props: Props) => {
 
-  const markerValues = useMarkerValues({range: props.range, targetCount: props.targetCount});
+  const majorMarkers = useMarkerValues({range: props.range, targetCount: props.targetCount});
+  const minorMarkers = useMinorMarkerValues({majorMarkers});
 
-  return <>{markerValues.map(v => 
-
-    <Marker
-      key={v} 
-      value={props.format(v)} 
-      align={props.align}
-      top={(props.range.max - v) / (props.range.max - props.range.min)}
-    />
-  )}</>;
+  return <>
+    {majorMarkers.map(v => 
+      <Marker
+        key={v} 
+        value={props.format(v)} 
+        align={props.align}
+        top={(props.range.max - v) / (props.range.max - props.range.min)}
+      />
+    )}
+    {minorMarkers.map(v => 
+      <Marker
+        key={v} 
+        align={props.align}
+        top={(props.range.max - v) / (props.range.max - props.range.min)}
+      />
+    )}
+  </>;
 }

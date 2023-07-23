@@ -3,7 +3,7 @@ import cs from 'classnames';
 
 
 interface Props {
-  value: string
+  value?: string
   top: number
   align: 'left' | 'right'
 }
@@ -11,7 +11,11 @@ interface Props {
 
 export const Marker = (props: Props) => {
   return (
-    <div className={cs(styles.marker, props.align === 'left' && styles.left, props.align === 'right' && styles.right)} style={{top: `${props.top * 100}%`}}>
+    <div className={cs(
+        styles.marker, props.align === 'left' && styles.left, 
+        props.align === 'right' && styles.right,
+        props.value === undefined && styles.minor,
+    )} style={{top: `${props.top * 100}%`}}>
       {props.value}<div className={styles.dash}/>
     </div>
   )
