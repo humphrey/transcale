@@ -2,14 +2,11 @@
 $vOverlap: 15px;
 
 .scale {
-  // display: flex;
-  // flex-direction: column-reverse;
-  // align-items: center;
   height: calc(100vh - $vOverlap - $vOverlap);
   width: 100vw;
   position: relative;
-  // background: yellow;
   margin: $vOverlap 0;
+  touch-action: none;
 }
 
 .verticalLine {
@@ -23,8 +20,6 @@ $vOverlap: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
-  // flex-grow: 1;
-  // flex-basis: 0;
   position: absolute;
   transform: translateY(-50%);
   &.left {

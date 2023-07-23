@@ -1,6 +1,5 @@
-import React from 'react';
-import styles from './Scale.module.scss'
-import { Marker } from './Marker';
+import { Markers } from './Markers';
+import styles from './Scale.module.scss';
 
 interface Props {
   left: {
@@ -17,40 +16,27 @@ interface Props {
 }
 
 export const Scale = ({left, right}: Props) => {
-  const markerInterval = 10;
-  const markers = [];
 
   const range2 = {
     min: right.convert(left.range.min),
     max: right.convert(left.range.max),
-  }
-
-  for (let leftValue = left.range.min; leftValue <= left.range.max; leftValue += markerInterval) {
-    const tempF = Math.round(right.convert(leftValue));
-
-    markers.push(
-      <Marker 
-        key={leftValue} 
-        value={`${leftValue}°C`} 
-        align='left' 
-        top={(left.range.max - leftValue) / (left.range.max - left.range.min)}
-      />
-    );
-    markers.push(
-      <Marker 
-        key={tempF} 
-        value={`${tempF}°F`} 
-        align='right' 
-        top={(range2.max - tempF) / (range2.max - range2.min)}
-      />
-    );
-  }
+  };
 
   return (
     <>
       <div className={styles.scale}>
       <div className={styles.verticalLine}/>
-        {markers}
+        <Markers 
+          align='left'
+          targetCount={10}
+          {...left}
+        />
+        <Markers 
+          align='right'
+          range={range2}
+          targetCount={10}
+          {...right}
+        />
       </div>
     </>
   );
