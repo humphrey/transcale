@@ -1,0 +1,57 @@
+
+$vOverlap: 15px;
+
+.scale {
+  // display: flex;
+  // flex-direction: column-reverse;
+  // align-items: center;
+  height: calc(100vh - $vOverlap - $vOverlap);
+  width: 100vw;
+  position: relative;
+  // background: yellow;
+  margin: $vOverlap 0;
+}
+
+.verticalLine {
+  border-left: 2px solid #000;
+  position: absolute;
+  top: 0 - $vOverlap; left: calc(50% - 1px); bottom: 0 - $vOverlap;
+  width: 2px;
+}
+
+.marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // flex-grow: 1;
+  // flex-basis: 0;
+  position: absolute;
+  transform: translateY(-50%);
+  &.left {
+    right: 50%;
+    .dash {margin-left: 10px;}
+  }
+  &.right {
+    left: 50%;
+    flex-direction: row-reverse;
+    .dash {margin-right: 10px;}
+  }
+}
+
+.dash {
+  height: 1px;
+  width: 10px;
+  border-top: 1px solid black;
+}
+
+.celsius, .fahrenheit {
+  position: absolute;
+}
+
+.celsius {
+  left: 10%;
+}
+
+.fahrenheit {
+  right: 10%;
+}
