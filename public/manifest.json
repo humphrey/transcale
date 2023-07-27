@@ -1,0 +1,22 @@
+{
+  "name": "Transcale Visual Converter",
+  "short_name": "Transcale",
+  "description": "A simple app for doing conversions visually on a scale.!",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#003355",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
