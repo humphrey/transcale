@@ -1,27 +1,30 @@
-import React from 'react'
-import './App.css'
+import React from 'react';
 import { Scale } from './Scale';
-import { useWheel } from './useWheel';
+import { useScaleGestures } from './useScaleGestures';
+
 
 function App() {
 
   const [range,  setRange] = React.useState({min: -50, max: 50})
   const celsiusToFahrenheit = (c: number) => (c * 9/5) + 32;
 
-  // Zoom in/out using Mac Trackpad
-  useWheel({
-    onZoom: scale => {
-      setRange(oldRange => {
-        return {
-          max: oldRange.max - ((oldRange.max - oldRange.min) * scale),
-          min: oldRange.min + ((oldRange.max - oldRange.min) * scale),
-        };
-      })
-    }
-  });
+  const bind = useScaleGestures({
+    onPan: d => setRange(oldRange => {
+      return {
+        max: oldRange.max + (d.delta / d.elementHeight * (oldRange.max - oldRange.min)),
+        min: oldRange.min + (d.delta / d.elementHeight * (oldRange.max - oldRange.min)),
+      };
+    }),
+    onZoom: d => setRange(oldRange => {
+      return {
+        max: oldRange.max - ((oldRange.max - oldRange.min) * d.delta),
+        min: oldRange.min + ((oldRange.max - oldRange.min) * d.delta),
+      };
+    }),
+  })
 
   return (
-    <>
+    <div {...bind} style={{touchAction: 'none'}}>
       <Scale
         left={{
           range,
@@ -32,7 +35,7 @@ function App() {
           format: degrees => `${degrees}°F`,
         }}
       />
-    </>
+    </div>
   )
 }
 

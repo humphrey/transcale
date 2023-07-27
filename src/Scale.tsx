@@ -13,15 +13,20 @@ interface Props {
     convert: (leftValue: number) => number
     format: (value: number) => string
   }
+  children?: React.ReactNode
 }
 
-export const Scale = ({left, right}: Props) => {
+export const Scale = ({left, right, ...props}: Props) => {
 
   const range2 = {
     min: right.convert(left.range.min),
     max: right.convert(left.range.max),
   };
 
+
+  if (props.children) {
+    return props.children;
+  }
   return (
     <>
       <div className={styles.scale}>

@@ -1,6 +1,9 @@
 
 $vOverlap: 15px;
 
+$verticalLineWidth: 2px;
+
+
 .scale {
   height: calc(100vh - $vOverlap - $vOverlap);
   width: 100vw;
@@ -10,10 +13,10 @@ $vOverlap: 15px;
 }
 
 .verticalLine {
-  border-left: 2px solid #000;
+  border-left: 2px solid #fff;
   position: absolute;
   top: 0 - $vOverlap; left: calc(50% - 1px); bottom: 0 - $vOverlap;
-  width: 2px;
+  width: $verticalLineWidth;
 }
 
 .marker {
@@ -23,11 +26,11 @@ $vOverlap: 15px;
   position: absolute;
   transform: translateY(-50%);
   &.left {
-    right: 50%;
+    right: calc(50% + $verticalLineWidth);
     .dash {margin-left: 10px;}
   }
   &.right {
-    left: 50%;
+    left: calc(50% + $verticalLineWidth);
     flex-direction: row-reverse;
     .dash {margin-right: 10px;}
   }
@@ -36,9 +39,10 @@ $vOverlap: 15px;
 .dash {
   height: 1px;
   width: 10px;
-  border-top: 1px solid black;
+  border-top: 1px solid #fff;
   .minor & {
     width: 5px;
+    border-color: #aaa;
   }
 }
 
